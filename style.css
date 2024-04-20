@@ -123,11 +123,15 @@ section #clear-btn {
 }
 
 /* Skecth */
+.border {
+    z-index: 997;
+    border: 5px solid;
+    border-radius: 5px;
+    padding: 0;
+}
 .container {
     width: 800px;
     height: 800px;
-    border: 4px solid;
-    border-radius: 5px;
 
     display: flex;
     flex-flow: row wrap;
@@ -199,7 +203,7 @@ aside {
     height: 200vh;
     background-color: black;
 
-    opacity: 0.5;
+    opacity: 0.8;
 }
 
 /* foot */
