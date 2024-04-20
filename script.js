@@ -93,9 +93,15 @@ function draw(e) {
 
 // Grid toggle
 toggleGrid.addEventListener('change', () => {
-  document
-    .querySelectorAll('.square')
-    .forEach((square) => square.classList.toggle('enable-border'));
+  if (toggleGrid.checked) {
+    document
+      .querySelectorAll('.square')
+      .forEach((square) => square.classList.add('enable-border'));
+  } else {
+    document
+      .querySelectorAll('.square')
+      .forEach((square) => square.classList.remove('enable-border'));
+  }
 });
 
 // Clear sketch
