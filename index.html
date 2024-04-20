@@ -16,23 +16,26 @@
           <h3>Pick Color</h3>
           <div class="color-checkboxes">
             <input type="color" name="color" id="color-wheel" />
-            <div class="rainbow-border">
-              <label for="color-rainbow"></label>
+            <label for="color-rainbow">
               <input type="checkbox" name="color" id="color-rainbow" />
-            </div>
+              <span>Rainbow Mode</span>
+            </label>
           </div>
           <button type="button" id="pick-color-btn">Pick Color</button>
         </div>
         <div class="settings">
           <div class="dropdown">
-            <label for="mode">Select drawing mode</label>
+            <h3>Settings</h3>
             <select name="mode" id="mode">
-              <option value="hover" selected>Hover</option>
+              <option value="hold" selected>Hold</option>
+              <option value="hover">Hover</option>
               <option value="click">Click</option>
+              <option value="erase">Erase</option>
             </select>
           </div>
-          <button type="button" id="new-sketch">New Sketch</button>
         </div>
+        <button type="button" id="new-sketch-btn">New Sketch</button>
+        <button type="button" id="clear-btn">Clear</button>
       </section>
       <div class="container"></div>
     </main>
@@ -40,11 +43,13 @@
       <div class="modal">
         <p class="modal-text">Heres modal text</p>
         <label>
-          Grid amount per side
+          Grid amount
           <input
-            type="text"
-            placeholder="Input placeholder"
-            class="modal-input"
+            type="range"
+            name="grid-slider"
+            id="grid-slider"
+            min="1"
+            max="100"
           />
         </label>
         <div class="modal-buttons">

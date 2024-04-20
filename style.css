@@ -1,12 +1,14 @@
 :root {
-    --clr-bg-header: ;
-    --clr-bg-main: ;
-    --clr-bg-footer: ;
-    --clr-bg-container: ;
+    --clr-bg-header: #2b2d42;
+    --clr-bg-main: #8d99ae;
+    --clr-bg-footer: #2b2d42;
+    --clr-bg-container: #8d99ae;
 
-    --clr-text-header: ;
-    --clr-text-footer: ;
-    --clr-text-control: ;
+    --clr-text-header: #edf2f4;
+    --clr-text-footer: #edf2f4;
+    --clr-text-control: #;
+
+    --clr-cta: #4361ee;
 }
 *{
     padding: 0;
@@ -20,57 +22,91 @@ body {
     align-items: center;
     row-gap: 0.5rem;
 
-    padding: 1rem;
     font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: var(--clr-bg-main);
+}
+header {
+    background-color: var(--clr-bg-header);
+    color: var(--clr-text-header);
+    width: 100%;
+    text-align: center;
+    padding: 10px 0 20px 0;
+    font-size: 24px;
 }
 main {
+    margin: 20px 0;
     display: flex;
+    column-gap: 1rem;
 }
 .color-picker {
     padding: 1rem;
-    margin: 1rem;
     display: flex;
     flex-flow: column nowrap;
     row-gap: 10px;
     text-align: center;
 
     border: 1px solid ;
-}
-.color-picker button {
-    display: block;
-}
-.color-picker #color-rainbow {
-    display: none;
-}
-.color-picker .rainbow-border {
-    padding: 4px 2px;
-
-    width: 80px;
-    height: 50px;
-    border: 1px solid black;
-}
-.color-picker label {
-    display: block;
-    background-image: linear-gradient(90deg, red, orange, yellow,green, blue, indigo, violet);
-    height: 100%;
-    width: 100%;
+    border-radius: 5px;
 }
 .color-picker #color-wheel {
-    margin-right: 10px;
-    width: 80px;
-    height: 50px;
+    width: 100px;
+    height: 40px;
+    margin-bottom: 10px;
+
 }
-.color-picker #pick-color-btn{
-    width: 100%;
-    padding: 10px;
-}
-.color-checkboxes {
+.color-picker label {
     display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+
+    font-size: 16px;
+
+    width: 100%;
+    height: 20px;
 }
+
+.color-picker button {
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.settings {
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid;
+    border-radius: 5px;
+    text-align: center;
+}
+.settings select{
+    display: block;
+    margin: 10px auto 0 auto;
+    font-size: 16px;
+    font-weight: bold;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+}
+section #new-sketch-btn, 
+section #clear-btn {
+    width: 80%;
+    padding: 5px;
+    display: block;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Skecth */
 .container {
-    width: 900px;
-    height: 900px;
-    background-color: #000;
+    width: 800px;
+    height: 800px;
+    border: 4px solid;
+    border-radius: 5px;
 
     display: flex;
     flex-flow: row wrap;
@@ -81,4 +117,38 @@ main {
 .square {
     border: 1px solid white;
     transition: background-color 0.5s;
+}
+
+/* Modal */
+aside {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal {
+    margin-bottom: 100px;
+    z-index: 999;
+    width: 400px;
+    height: 200px;
+    background-color: #fff;
+}
+.modal-overlay {
+    position: absolute;
+    z-index: 998;
+    width: 100%;
+    height: 200vh;
+    background-color: var(--clr-bg-main);
+    opacity: 0.7;
+}
+
+/* foot */
+footer {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    background-color: var(--clr-bg-footer);
+    color: var(--clr-text-footer);
 }
