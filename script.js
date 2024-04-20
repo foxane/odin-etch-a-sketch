@@ -4,10 +4,9 @@ const main = document.querySelector('main');
 // Color picker
 const colorWheel = document.querySelector('#color-wheel');
 const colorRainbow = document.querySelector('#color-rainbow');
-const pickColorBtn = document.querySelector('#pick-color-btn');
 
 // Settings
-const mode = document.querySelector('#mode');
+const modeDropdown = document.querySelector('#mode');
 
 // Sketch buttons
 const newBtn = document.querySelector('#new-sketch-btn');
@@ -20,48 +19,77 @@ const modalOverlay = document.querySelector('.modal-overlay');
 const modalConfirm = document.querySelector('.modal-confirm');
 const modalCancel = document.querySelector('.modal-cancel');
 
-// Draw mode
-mode.addEventListener('change', function () {
-  console.log(mode.value);
-});
-
-// Draw
-const draw = function (e) {
-  if (e.type === 'mouseover' && !isPressed) return;
-  e.target.style.backgroundColor = 'red';
-};
-
-// Create squre
-const createSqr = function (sqrAmount) {
-  const sqrTotal = sqrAmount * sqrAmount;
-  for (let i = 0; i < sqrTotal; i++) {
-    container.innerHTML += `<div name="unused" class="square" id="sqr-${i}"></div>`;
-    const sqr = document.getElementById(`sqr-${i}`);
-    sqr.style.cssText = `
-    width: ${800 / sqrAmount}px;
-    height: ${800 / sqrAmount}px;
-    `;
-  }
-};
-
-createSqr(16);
-// Color can't be changed after hover
-
+// Mouse event control
 let isPressed = false;
-document.body.addEventListener('mousedown', () => {
-  isPressed = true;
-});
-document.body.addEventListener('mouseup', () => {
-  isPressed = false;
-});
+document.body.addEventListener('mousedown', () => (isPressed = true));
+document.body.addEventListener('mouseup', () => (isPressed = false));
 
-document.querySelectorAll('.square').forEach((sqr) =>
-  sqr.addEventListener('mouseover', function (e) {
-    draw(e);
-  })
-);
-document.querySelectorAll('.square').forEach((sqr) =>
-  sqr.addEventListener('mousedown', function (e) {
-    draw(e);
-  })
-);
+// Color control
+const color = function () {
+  const r = Math.floor(Math.random() * 255 + 1);
+  const g = Math.floor(Math.random() * 255 + 1);
+  const b = Math.floor(Math.random() * 255 + 1);
+
+  if (colorRainbow.checked) {
+    return `rgb(${r},${g},${b})`;
+  }
+  return colorWheel.value;
+};
+
+// Mode control
+
+// create square
+const createSquare = function (amount) {
+  const CONTAINER_AREA = 800; // in px
+  const sqrSize = `${CONTAINER_AREA / amount}px`;
+  const sqrAmount = amount * amount;
+
+  console.log(sqrSize);
+
+  for (let i = 0; i < sqrAmount; i++) {
+    container.innerHTML += `<div class="square" name="unused"></div>`;
+  }
+
+  const squareDiv = document.querySelectorAll('.square');
+  squareDiv.forEach((square) =>
+    square.addEventListener('mouseover', function (e) {
+      draw(e);
+      square.removeAttribute('name');
+    })
+  );
+  squareDiv.forEach((square) =>
+    square.addEventListener('click', function (e) {
+      draw(e);
+      square.removeAttribute('name');
+    })
+  );
+  squareDiv.forEach(
+    (square) => (square.style.cssText = `width: ${sqrSize}; height: ${sqrSize}`)
+  );
+};
+
+function draw(e) {
+  if (e.target.classList.contains('used')) return;
+  switch (modeDropdown.value) {
+    case 'hold':
+      // Hold
+      if (e.type === 'mouseover' && !isPressed) return;
+      e.target.style.backgroundColor = `${color()}`;
+      break;
+    case 'hover':
+      // Hover
+      if (e.type === 'mouseover') e.target.style.backgroundColor = `${color()}`;
+      break;
+    case 'click':
+      // Click
+      if (e.type === 'click') e.target.style.backgroundColor = `${color()}`;
+      break;
+    case 'erase':
+      // Erase
+      e.target.style.backgroundColor = 'transparent';
+      break;
+  }
+  e.target.classList.add('used');
+}
+
+createSquare(10);
