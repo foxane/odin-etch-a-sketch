@@ -11,8 +11,49 @@
       <h1>Sketch!</h1>
     </header>
     <main>
+      <section class="control">
+        <div class="color-picker">
+          <h3>Pick Color</h3>
+          <div class="color-checkboxes">
+            <input type="color" name="color" id="color-wheel" />
+            <div class="rainbow-border">
+              <label for="color-rainbow"></label>
+              <input type="checkbox" name="color" id="color-rainbow" />
+            </div>
+          </div>
+          <button type="button" id="pick-color-btn">Pick Color</button>
+        </div>
+        <div class="settings">
+          <div class="dropdown">
+            <label for="mode">Select drawing mode</label>
+            <select name="mode" id="mode">
+              <option value="hover" selected>Hover</option>
+              <option value="click">Click</option>
+            </select>
+          </div>
+          <button type="button" id="new-sketch">New Sketch</button>
+        </div>
+      </section>
       <div class="container"></div>
     </main>
+    <aside>
+      <div class="modal">
+        <p class="modal-text">Heres modal text</p>
+        <label>
+          Grid amount per side
+          <input
+            type="text"
+            placeholder="Input placeholder"
+            class="modal-input"
+          />
+        </label>
+        <div class="modal-buttons">
+          <button type="button" class="modal-cancel">Cancel</button>
+          <button type="button" class="modal-confirm">Confirm</button>
+        </div>
+      </div>
+      <div class="modal-overlay"></div>
+    </aside>
     <footer><p>foxane @ The Odin Project</p></footer>
     <script src="script.js"></script>
   </body>

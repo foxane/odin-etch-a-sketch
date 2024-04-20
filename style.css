@@ -1,11 +1,75 @@
+:root {
+    --clr-bg-header: ;
+    --clr-bg-main: ;
+    --clr-bg-footer: ;
+    --clr-bg-container: ;
+
+    --clr-text-header: ;
+    --clr-text-footer: ;
+    --clr-text-control: ;
+}
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+body {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    row-gap: 0.5rem;
+
+    padding: 1rem;
+    font-size: 1.2rem;
+}
+main {
+    display: flex;
+}
+.color-picker {
+    padding: 1rem;
+    margin: 1rem;
+    display: flex;
+    flex-flow: column nowrap;
+    row-gap: 10px;
+    text-align: center;
+
+    border: 1px solid ;
+}
+.color-picker button {
+    display: block;
+}
+.color-picker #color-rainbow {
+    display: none;
+}
+.color-picker .rainbow-border {
+    padding: 4px 2px;
+
+    width: 80px;
+    height: 50px;
+    border: 1px solid black;
+}
+.color-picker label {
+    display: block;
+    background-image: linear-gradient(90deg, red, orange, yellow,green, blue, indigo, violet);
+    height: 100%;
+    width: 100%;
+}
+.color-picker #color-wheel {
+    margin-right: 10px;
+    width: 80px;
+    height: 50px;
+}
+.color-picker #pick-color-btn{
+    width: 100%;
+    padding: 10px;
+}
+.color-checkboxes {
+    display: flex;
+}
 .container {
-    width: 1000px;
-    height: 1000px;
+    width: 900px;
+    height: 900px;
     background-color: #000;
 
     display: flex;
