@@ -39,19 +39,23 @@
       </section>
       <div class="container"></div>
     </main>
-    <aside>
+    <aside class="hidden">
       <div class="modal">
-        <p class="modal-text">Heres modal text</p>
+        <h3 class="modal-text">New Sketch</h3>
         <label>
-          Grid amount
+          Sketch Size
           <input
             type="range"
             name="grid-slider"
             id="grid-slider"
             min="1"
             max="100"
+            value="16"
+            oninput="this.nextElementSibling.textContent = `${this.value} x ${this.value}`"
           />
+          <span>16 x 16</span>
         </label>
+        <p>Your current sketch will be cleared!</p>
         <div class="modal-buttons">
           <button type="button" class="modal-cancel">Cancel</button>
           <button type="button" class="modal-confirm">Confirm</button>
@@ -59,7 +63,25 @@
       </div>
       <div class="modal-overlay"></div>
     </aside>
-    <footer><p>foxane @ The Odin Project</p></footer>
+    <footer>
+      <p>
+        <a
+          href="http://github.com/foxane/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          foxane
+        </a>
+        @
+        <a
+          href="http://theodinproject.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          The Odin Project
+        </a>
+      </p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
