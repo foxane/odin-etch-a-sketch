@@ -1,3 +1,5 @@
+'use strict';
+
 const container = document.querySelector('.container');
 const main = document.querySelector('main');
 
@@ -7,7 +9,7 @@ const colorRainbow = document.querySelector('#color-rainbow');
 
 // Settings
 const modeDropdown = document.querySelector('#mode');
-const toggleGrid = document.querySelector('#square-border');
+const gridCheckbox = document.querySelector('#square-border');
 
 // Sketch buttons
 const newBtn = document.querySelector('#new-sketch-btn');
@@ -44,10 +46,8 @@ const createSquare = function (amount) {
   const sqrSize = `${CONTAINER_AREA / amount}px`;
   const sqrAmount = amount * amount;
 
-  console.log(sqrSize);
-
   for (let i = 0; i < sqrAmount; i++) {
-    container.innerHTML += `<div class="square" name="unused"></div>`;
+    container.innerHTML += `<div class="square"></div>`;
   }
 
   const squareDiv = document.querySelectorAll('.square');
@@ -64,36 +64,39 @@ const createSquare = function (amount) {
   squareDiv.forEach(
     (square) => (square.style.cssText = `width: ${sqrSize}; height: ${sqrSize}`)
   );
+  gridToggle();
 };
 
 // Mode control
-function draw(e) {
-  if (e.target.classList.contains('used')) return;
-  switch (modeDropdown.value) {
-    case 'hold':
-      // Hold
-      if (e.type === 'mouseover' && !isPressed) return;
-      e.target.style.backgroundColor = `${color()}`;
-      break;
-    case 'hover':
-      // Hover
-      if (e.type === 'mouseover') e.target.style.backgroundColor = `${color()}`;
-      break;
-    case 'click':
-      // Click
-      if (e.type === 'click') e.target.style.backgroundColor = `${color()}`;
-      break;
-    case 'erase':
-      // Erase
-      e.target.style.backgroundColor = 'transparent';
-      break;
+const draw = function (e) {
+  if (e.target.classList.contains('used') && modeDropdown.value !== 'erase')
+    return;
+  if (e.target.classList.contains('used') && modeDropdown.value === 'erase') {
+    e.target.style.backgroundColor = 'transparent';
+    e.target.classList.remove('used');
+  } else if (e.type === 'mouseover' && modeDropdown.value === 'hover') {
+    e.target.style.backgroundColor = `${color()}`;
+    e.target.classList.add('used');
+  } else if (
+    e.type === 'mouseover' &&
+    modeDropdown.value === 'hold' &&
+    isPressed
+  ) {
+    e.target.style.backgroundColor = `${color()}`;
+    e.target.classList.add('used');
+  } else if (
+    e.type === 'click' &&
+    modeDropdown.value === 'click' &&
+    !isPressed
+  ) {
+    e.target.style.backgroundColor = `${color()}`;
+    e.target.classList.add('used');
   }
-  e.target.classList.add('used');
-}
+};
 
 // Grid toggle
-toggleGrid.addEventListener('change', () => {
-  if (toggleGrid.checked) {
+const gridToggle = function () {
+  if (gridCheckbox.checked) {
     document
       .querySelectorAll('.square')
       .forEach((square) => square.classList.add('enable-border'));
@@ -102,7 +105,8 @@ toggleGrid.addEventListener('change', () => {
       .querySelectorAll('.square')
       .forEach((square) => square.classList.remove('enable-border'));
   }
-});
+};
+gridCheckbox.addEventListener('change', gridToggle);
 
 // Clear sketch
 const clearSketch = function () {

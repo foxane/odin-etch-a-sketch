@@ -148,7 +148,7 @@ section .grid-border {
 }
 .square {
 
-    transition: background-color 0.5s;
+    transition: background-color 0.25s;
 }
 
 /* Modal */
