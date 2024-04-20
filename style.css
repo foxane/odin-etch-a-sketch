@@ -12,10 +12,13 @@
 }
 /* Utils */
 .blur {
-    filter: blur(2px);
+    filter: blur(4px);
 }
 .hidden {
     display: none;
+}
+.enable-border {
+    border: 1px solid white;
 }
 
 /* Hovers */
@@ -122,6 +125,10 @@ section #clear-btn {
     margin-bottom: 10px;
 }
 
+section .grid-border {
+    margin-top: 20px;
+}
+
 /* Skecth */
 .border {
     z-index: 997;
@@ -140,12 +147,13 @@ section #clear-btn {
     gap: 0px;
 }
 .square {
-    border: 1px solid white;
+
     transition: background-color 0.5s;
 }
 
 /* Modal */
 aside {
+    z-index: 999;
     position: fixed;
     width: 100%;
     height: 100vh;

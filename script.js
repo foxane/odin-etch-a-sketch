@@ -7,6 +7,7 @@ const colorRainbow = document.querySelector('#color-rainbow');
 
 // Settings
 const modeDropdown = document.querySelector('#mode');
+const toggleGrid = document.querySelector('#square-border');
 
 // Sketch buttons
 const newBtn = document.querySelector('#new-sketch-btn');
@@ -18,6 +19,7 @@ const modal = document.querySelector('.modal');
 const modalOverlay = document.querySelector('.modal-overlay');
 const modalConfirm = document.querySelector('.modal-confirm');
 const modalCancel = document.querySelector('.modal-cancel');
+const modalSlider = document.querySelector('#modal-slider');
 
 // Mouse event control
 let isPressed = false;
@@ -36,8 +38,6 @@ const color = function () {
   return colorWheel.value;
 };
 
-// Mode control
-
 // create square
 const createSquare = function (amount) {
   const CONTAINER_AREA = 800; // in px
@@ -54,13 +54,11 @@ const createSquare = function (amount) {
   squareDiv.forEach((square) =>
     square.addEventListener('mouseover', function (e) {
       draw(e);
-      square.removeAttribute('name');
     })
   );
   squareDiv.forEach((square) =>
     square.addEventListener('click', function (e) {
       draw(e);
-      square.removeAttribute('name');
     })
   );
   squareDiv.forEach(
@@ -68,6 +66,7 @@ const createSquare = function (amount) {
   );
 };
 
+// Mode control
 function draw(e) {
   if (e.target.classList.contains('used')) return;
   switch (modeDropdown.value) {
@@ -91,5 +90,47 @@ function draw(e) {
   }
   e.target.classList.add('used');
 }
+
+// Grid toggle
+toggleGrid.addEventListener('change', () => {
+  document
+    .querySelectorAll('.square')
+    .forEach((square) => square.classList.toggle('enable-border'));
+});
+
+// Clear sketch
+const clearSketch = function () {
+  document
+    .querySelectorAll('.square')
+    .forEach((square) => (square.style.backgroundColor = 'transparent'));
+  document
+    .querySelectorAll('.square')
+    .forEach((square) => square.classList.remove('used'));
+};
+
+// Modal
+const toggleModal = function () {
+  modalContainer.classList.toggle('hidden');
+  main.classList.toggle('blur');
+};
+
+const modalBool = function (isConfirmed) {
+  if (isConfirmed) {
+    container.innerHTML = '';
+    createSquare(modalSlider.value);
+    toggleModal();
+  } else {
+    toggleModal();
+  }
+};
+
+newBtn.addEventListener('click', function () {
+  toggleModal();
+});
+
+clearBtn.addEventListener('click', () => clearSketch());
+
+modalConfirm.addEventListener('click', () => modalBool(true));
+modalCancel.addEventListener('click', () => modalBool(false));
 
 createSquare(10);

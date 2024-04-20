@@ -31,13 +31,17 @@
               <option value="click">Click</option>
               <option value="erase">Erase</option>
             </select>
+            <label>
+              <input type="checkbox" id="square-border" class="grid-border" />
+              Grid lines
+            </label>
           </div>
         </div>
         <button type="button" id="new-sketch-btn">New Sketch</button>
         <button type="button" id="clear-btn">Clear</button>
       </section>
       <div class="border">
-        <div class="container"></div>
+        <div class="container" id="container"></div>
       </div>
     </main>
     <aside class="hidden">
@@ -47,8 +51,8 @@
           Sketch Size
           <input
             type="range"
-            name="grid-slider"
-            id="grid-slider"
+            name="modal-slider"
+            id="modal-slider"
             min="1"
             max="100"
             value="16"
