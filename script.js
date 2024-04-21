@@ -23,6 +23,8 @@ const modalConfirm = document.querySelector('.modal-confirm');
 const modalCancel = document.querySelector('.modal-cancel');
 const modalSlider = document.querySelector('#modal-slider');
 
+let squares;
+
 // Mouse event control
 let isPressed = false;
 document.body.addEventListener('mousedown', () => (isPressed = true));
@@ -42,28 +44,25 @@ const color = function () {
 
 // create square
 const createSquare = function (amount) {
-  const CONTAINER_AREA = 800; // in px
+  const CONTAINER_AREA = 800;
   const sqrSize = `${CONTAINER_AREA / amount}px`;
   const sqrAmount = amount * amount;
 
   for (let i = 0; i < sqrAmount; i++) {
-    container.innerHTML += `<div class="square"></div>`;
+    const sqrDiv = document.createElement('div');
+    sqrDiv.classList.add('square');
+    sqrDiv.style.width = sqrSize;
+    sqrDiv.style.height = sqrSize;
+    container.appendChild(sqrDiv);
+
+    sqrDiv.addEventListener('mouseover', function (e) {
+      draw(e);
+    });
+    sqrDiv.addEventListener('click', function (e) {
+      draw(e);
+    });
   }
 
-  const squareDiv = document.querySelectorAll('.square');
-  squareDiv.forEach((square) =>
-    square.addEventListener('mouseover', function (e) {
-      draw(e);
-    })
-  );
-  squareDiv.forEach((square) =>
-    square.addEventListener('click', function (e) {
-      draw(e);
-    })
-  );
-  squareDiv.forEach(
-    (square) => (square.style.cssText = `width: ${sqrSize}; height: ${sqrSize}`)
-  );
   gridToggle();
 };
 
@@ -110,12 +109,11 @@ gridCheckbox.addEventListener('change', gridToggle);
 
 // Clear sketch
 const clearSketch = function () {
-  document
-    .querySelectorAll('.square')
-    .forEach((square) => (square.style.backgroundColor = 'transparent'));
-  document
-    .querySelectorAll('.square')
-    .forEach((square) => square.classList.remove('used'));
+  squares = document.querySelectorAll('.square');
+  for (const square of squares) {
+    square.style.backgroundColor = 'transparent';
+    square.classList.remove('used');
+  }
 };
 
 // Modal
